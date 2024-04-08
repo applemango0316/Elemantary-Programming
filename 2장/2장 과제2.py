@@ -1,7 +1,7 @@
-#20244021, 컴퓨터공학과, 김성준
-print("20244021, 컴퓨터공학과, 김성준")
-import urllib.request
+# 20244021, 컴퓨터공학과, 김성준
 import time
+import urllib.request
+print("20244021, 컴퓨터공학과, 김성준")
 
 price = 99.99
 while price > 4.74:

@@ -1,6 +1,6 @@
-#20244021, 컴퓨터공학과, 김성준
-print("20244021, 컴퓨터공학과, 김성준")
+# 20244021, 컴퓨터공학과, 김성준
 from random import randint
+print("20244021, 컴퓨터공학과, 김성준")
 secret = randint(1, 10)
 print("Welcome")
 guess = 0

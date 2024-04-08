@@ -1,12 +1,13 @@
-#20244021, 컴퓨터공학과, 김성준
-print("20244021, 컴퓨터공학과, 김성준")
+# 20244021, 컴퓨터공학과, 김성준
 import urllib.request
- 
-#서울날씨사이트조회
-page = urllib.request.urlopen("https://119.seoul.go.kr/asims/wether/selectWetherList.do")
+print("20244021, 컴퓨터공학과, 김성준")
+
+# 서울날씨사이트조회
+page = urllib.request.urlopen(
+    "https://119.seoul.go.kr/asims/wether/selectWetherList.do")
 text = page.read().decode("utf8")
 
-#온도
+# 온도
 wheret = text.find("<li class=\"t\"><strong>")
 TS = wheret + 22
 TE = TS + 5
@@ -47,7 +48,7 @@ if T11 == "&":
     TE = TS + 1
     T = text[TS: TE]
 
-#습도
+# 습도
 wherew = text.find("습도 <strong>")
 WS = wherew + 11
 WE = WS + 4
@@ -69,7 +70,7 @@ if W4 == "<":
 
 WS3 = wherew + 14
 WE3 = WS3 + 1
-W3= text[WS3: WE3]
+W3 = text[WS3: WE3]
 if W3 == "<":
     WE = WS + 3
     W = text[WS: WE]
@@ -88,7 +89,7 @@ if W1 == "<":
     WE = WS + 1
     W = text[WS: WE]
 
-#강수량(시간)
+# 강수량(시간)
 whererh = text.find("<li>강수량 1시간 <span class=\"txt_cold\"><strong>")
 RHS = whererh + 43
 RHE = RHS + 4
@@ -122,7 +123,7 @@ if RH1 == "<":
     RHE = RHS + 1
     RH = text[RHS: RHE]
 
-#강수량(하루)
+# 강수량(하루)
 whererd = text.find("<li>강수량 1일 <span class=\"txt_cold\"><strong>")
 RDS = whererd + 42
 RDE = RDS + 4
@@ -156,7 +157,7 @@ if RD1 == "<":
     RDE = RDS + 1
     RD = text[RDS: RDE]
 
-#기상상태
+# 기상상태
 wherec = text.find("<li>강수량 1일 <span class=\"txt_cold\"><strong>")
 CS = wherec + 85
 CE = CS + 6
@@ -250,12 +251,12 @@ if CD1 == "<":
     CE = CS + 1
     CD = text[CS: CE]
 
-#현재시간조회
+# 현재시간조회
 page = urllib.request.urlopen("http://cs.sch.ac.kr./prices-loyalty.py")
 text1 = page.read().decode("utf8")
 t1 = text1.find(">P")
 
-#요일
+# 요일
 TDS = t1 + 10
 TDE = TDS + 3
 Day1 = text1[TDS: TDE]
@@ -279,7 +280,7 @@ else:
                     else:
                         Day2 = "일요일"
 
-#월
+# 월
 TM1S = t1 + 14
 TM1E = TM1S + 3
 Mon = text1[TM1S: TM1E]
@@ -319,30 +320,32 @@ else:
                                             if Mon == "Dec":
                                                 Month = "12월"
 
-#일
+# 일
 TD1S = t1 + 18
 TD1E = TD1S + 2
 TD1 = text1[TD1S: TD1E]
 
-#년도
+# 년도
 TYS = t1 + 30
 TYE = TYS + 4
 TY = text1[TYS: TYE]
 
-#시
+# 시
 THS = t1 + 21
 THE = THS + 2
 TH = text1[THS: THE]
 
-#분
+# 분
 TMS = t1 + 24
 TME = TMS + 2
 TM = text1[TMS: TME]
 
-#초
+# 초
 TSS = t1 + 27
 TSE = TSS + 2
 TS1 = text1[TSS: TSE]
 
-final = "현재시각 " + TY + "년 " + Month + " " + TD1 + "일 " + Day2 + " " + TH + "시 " + TM + "분 " + TS1 + "초 " + "서울날씨 " + T + "℃ " + " 습도 " + W + "% " + "시간당 강수량 " + RH + "mm " + "하루 총 강수량 " + RD + "mm " + CD
+final = "현재시각 " + TY + "년 " + Month + " " + TD1 + "일 " + Day2 + " " + TH + "시 " + TM + "분 " + TS1 + \
+    "초 " + "서울날씨 " + T + "℃ " + " 습도 " + W + "% " + \
+        "시간당 강수량 " + RH + "mm " + "하루 총 강수량 " + RD + "mm " + CD
 print(final)

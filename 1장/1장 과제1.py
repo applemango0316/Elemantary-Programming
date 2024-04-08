@@ -1,7 +1,7 @@
-Python 3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AMD64)] on win32
+Python 3.12.2 (tags/v3.12.2: 6abddd9, Feb  6 2024, 21: 26: 36)[MSC v.1937 64 bit(AMD64)] on win32
 Type "help", "copyright", "credits" or "license()" for more information.
->>> #20244021, 컴퓨터공학과, 김성준
->>> print("202
+>> >  # 20244021, 컴퓨터공학과, 김성준
+>> > print("202
 ...       
 SyntaxError: unterminated string literal (detected at line 1)
 >>> print("20244021, 컴퓨터공학과, 김성준")

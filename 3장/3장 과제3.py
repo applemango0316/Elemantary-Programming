@@ -1,19 +1,21 @@
-#20244021, 컴퓨터공학과, 김성준
+# 20244021, 컴퓨터공학과, 김성준
+import time
+import urllib.request
+import requests
+import datetime
+import discord
 print("20244021, 컴퓨터공학과, 김성준")
 
-import discord
-import datetime
-import requests
-import urllib.request
-import time
 
-#날씨함수정의
+# 날씨함수정의
+
 def weather():
-    #서울날씨사이트조회
-    page = urllib.request.urlopen("https://119.seoul.go.kr/asims/wether/selectWetherList.do")
+    # 서울날씨사이트조회
+    page = urllib.request.urlopen(
+        "https://119.seoul.go.kr/asims/wether/selectWetherList.do")
     text = page.read().decode("utf8")
 
-    #온도
+    # 온도
     wheret = text.find("<li class=\"t\"><strong>")
     TS = wheret + 22
     TE = TS + 5
@@ -54,7 +56,7 @@ def weather():
         TE = TS + 1
         T = text[TS: TE]
 
-    #습도
+    # 습도
     wherew = text.find("습도 <strong>")
     WS = wherew + 11
     WE = WS + 4
@@ -76,7 +78,7 @@ def weather():
 
     WS3 = wherew + 14
     WE3 = WS3 + 1
-    W3= text[WS3: WE3]
+    W3 = text[WS3: WE3]
     if W3 == "<":
         WE = WS + 3
         W = text[WS: WE]
@@ -95,7 +97,7 @@ def weather():
         WE = WS + 1
         W = text[WS: WE]
 
-    #강수량(시간)
+    # 강수량(시간)
     whererh = text.find("<li>강수량 1시간 <span class=\"txt_cold\"><strong>")
     RHS = whererh + 43
     RHE = RHS + 4
@@ -129,7 +131,7 @@ def weather():
         RHE = RHS + 1
         RH = text[RHS: RHE]
 
-    #강수량(하루)
+    # 강수량(하루)
     whererd = text.find("<li>강수량 1일 <span class=\"txt_cold\"><strong>")
     RDS = whererd + 42
     RDE = RDS + 4
@@ -163,7 +165,7 @@ def weather():
         RDE = RDS + 1
         RD = text[RDS: RDE]
 
-    #기상상태
+    # 기상상태
     wherec = text.find("<li>강수량 1일 <span class=\"txt_cold\"><strong>")
     CS = wherec + 85
     CE = CS + 6
@@ -256,21 +258,24 @@ def weather():
     if CD1 == "<":
         CE = CS + 1
         CD = text[CS: CE]
-    return("서울날씨 " + T + "℃ " + " 습도 " + W + "% " + "시간당 강수량 " + RH + "mm " + "하루 총 강수량 " + RD + "mm " + CD)
+    return ("서울날씨 " + T + "℃ " + " 습도 " + W + "% " + "시간당 강수량 " + RH + "mm " + "하루 총 강수량 " + RD + "mm " + CD)
 
+
+# 디스코드 채널로 메세지 전송
 discord_url = 'https://discord.com/api/webhooks/1225310655695814746/LlkNFLAt3Y1oDrsD2EEMvn1DMyd0bj9JRJ1y-pE_EaVz6sNdjKPwfAeD_IMC6TUzuPoo'
 
-#디스코드 채널로 메세지 전송
+
 def discord_send_message(text):
     now = datetime.datetime.now()
     message = {"content": f"[{now.strftime('%Y-%m-%d %H:%M:%S')}] {str(text)}"}
     requests.post(discord_url, data=message)
-    return(message)
+    return (message)
+
 
 msg = weather()
-loop = 0
 
-#1시간동안 5분마다 반복전송
+# 1시간동안 5분마다 반복전송
+loop = 0
 while loop < 12:
     discord_send_message(msg)
     time.sleep(300)

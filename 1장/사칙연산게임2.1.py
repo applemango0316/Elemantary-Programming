@@ -1,10 +1,10 @@
-#컴퓨터공학과 20244021 김성준
+# 컴퓨터공학과 20244021 김성준
+from random import randint
 print("컴퓨터공학과 20244021 김성준")
 print("사칙연산게임")
-from random import randint
-first1 = randint (1, 10)
-second1 = randint (1, 10)
-math1 = randint (1, 3)
+first1 = randint(1, 10)
+second1 = randint(1, 10)
+math1 = randint(1, 3)
 g1 = 1004
 print("1단계")
 if math1 == 1:
@@ -43,10 +43,9 @@ else:
                 print("틀렸습니다")
 print("1단계 클리어!")
 print("2단계")
-from random import randint
-first2 = randint (10, 100)
-second2 = randint (10, 100)
-math2 = randint (1, 3)
+first2 = randint(10, 100)
+second2 = randint(10, 100)
+math2 = randint(1, 3)
 g2 = 1004100410041004
 if math2 == 1:
     correct2 = int(first2) + int(second2)
@@ -83,10 +82,9 @@ else:
             else:
                 print("틀렸습니다")
 print("2단계 클리어")
-from random import randint
-first3 = randint (100, 1000)
-second3 = randint (100, 1000)
-math3 = randint (1, 3)
+first3 = randint(100, 1000)
+second3 = randint(100, 1000)
+math3 = randint(1, 3)
 g3 = 1004100410041004100410041004
 print("3단계")
 if math3 == 1:
