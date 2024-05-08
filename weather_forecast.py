@@ -14,5 +14,6 @@ def weather_forecast(city):
     soup = BeautifulSoup(webpage, 'html.parser')
     temps = soup.find('div', 'temperature_text')
     summary = soup.find('p', 'summary')
-    print(city + " " + temps.text.strip())
-    print(summary.text.strip())
+    printA = city + " " + temps.text.strip()
+    printB = summary.text.strip()
+    return printA, printB
