@@ -31,7 +31,7 @@ def get_price():
     return float(text[start_of_price:end_of_price])
 
 
-price_now = input("Do you wnat to see the price now (Y/N)? ")
+price_now = input("Do you want to see the price now (Y/N)? ")
 if price_now == "Y":
     msg = "Buy now!, price $" + \
         str(get_price()) + " band_key: " + band_key + " " + Name
