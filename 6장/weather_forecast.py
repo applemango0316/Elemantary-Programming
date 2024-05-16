@@ -7,19 +7,13 @@ from urllib import parse
 
 
 def weather_forecast(city):
-    town = parse.quote(city)
+    town = parse.quote(city + "날씨")
     context = ssl._create_unverified_context()
     webpage = urllib.request.urlopen(
         f'https://search.naver.com/search.naver?sm=top_hty&fbm=0&ie=utf8&query={town}', context=context)
     soup = BeautifulSoup(webpage, 'html.parser')
     temps = soup.find('div', 'temperature_text')
     summary = soup.find('p', 'summary')
-    temperture = temps.text.strip()
-    cloud = summary.text.strip()
-    return temperture, cloud
-    print(temps)
-    print(temps.text.strip())
-    print(summary.text.strip())
-
-
-print(weather_forecast("아산"))
+    printA = city + " " + temps.text.strip()
+    printB = summary.text.strip()
+    return printA, printB
