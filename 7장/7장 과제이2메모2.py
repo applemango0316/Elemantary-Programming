@@ -18,20 +18,7 @@ app.title("지금날씨4.0")
 app.geometry('500x300+200+100')
 country = []
 
-
-def show_input():
-    user_input = country_input.get()
-    country.append(user_input)
-    c1_name = str(user_input) + " 날씨조회"
-    c1.config(text=c1_name)
-    global input_country
-    input_country = user_input
-    return input_country
-
-
-def submit_button_command():
-    show_input()
-    country_button2()
+# 메뉴 스위칭 함수
 
 
 def seoul_button():
@@ -89,29 +76,6 @@ def seoul_repeat_button_back():
     b4.grid()
     b5.grid()
     b_text.grid()
-
-
-def seoul_repeat_submit_button1_command():
-    seoul_repeat_button2()
-    global seoul_repeat_input_text1
-    seoul_repeat_input_text1 = seoul_repeat_input1.get()
-    return seoul_repeat_input_text1
-
-
-def seoul_repeat_submit_button2_command():
-    seoul_repeat_input_text2 = seoul_repeat_input2.get()
-    seoul_repeat_button_back()
-    i = 0
-    for loop in range(int(seoul_repeat_input_text1)):
-        i = i + 1
-        text = "전송되었습니다.", i, f"/{seoul_repeat_input_text1}\n"
-        seoul_record = open("weather_record_seoul.txt", "a", encoding="UTF-8")
-        seoul_record.write(str(send_to_discord(weather_forecast("서울"))))
-        seoul_record.write("\n")
-        time.sleep(int(seoul_repeat_input_text2))
-        b_text.insert(END, weather_forecast("서울"))
-        b_text.insert(END, text)
-        seoul_record.close()
 
 
 def country_button1():
@@ -178,29 +142,9 @@ def country_repeat_button_back():
     c_text.grid()
 
 
-def country_repeat_submit_button1_command():
-    country_repeat_button2()
-    global country_repeat_input_text1
-    country_repeat_input_text1 = country_repeat_input1.get()
-    return country_repeat_input_text1
-
-
-def country_repeat_submit_button2_command():
-    country_repeat_input_text2 = country_repeat_input2.get()
-    country_repeat_button_back()
-    i = 0
-    for loop in range(int(country_repeat_input_text1)):
-        i = i + 1
-        text = "전송되었습니다.", i, f"/{country_repeat_input_text1}\n"
-        country_record = open(
-            "weather_record_choose_city.txt", "a", encoding="UTF-8")
-        country_record.write(
-            str(send_to_discord(weather_forecast(input_country))))
-        country_record.write("\n")
-        time.sleep(int(country_repeat_input_text2))
-        c_text.insert(END, weather_forecast(str(input_country)))
-        c_text.insert(END, text)
-        country_record.close()
+def submit_button_command():
+    show_input()
+    country_button2()
 
 
 def record_button():
@@ -259,10 +203,46 @@ def remove_button_back():
     a5.grid()
 
 
+# 인풋값 함수
+
+def show_input():
+    user_input = country_input.get()
+    country.append(user_input)
+    c1_name = str(user_input) + " 날씨조회"
+    c1.config(text=c1_name)
+    global input_country
+    input_country = user_input
+    return input_country
+
+
+def country_repeat_submit_button1_command():
+    country_repeat_button2()
+    global country_repeat_input_text1
+    country_repeat_input_text1 = country_repeat_input1.get()
+    return country_repeat_input_text1
+
+
+def seoul_repeat_submit_button1_command():
+    seoul_repeat_button2()
+    global seoul_repeat_input_text1
+    seoul_repeat_input_text1 = seoul_repeat_input1.get()
+    return seoul_repeat_input_text1
+
+# 날씨 조회 함수
+
+
 def weather_seoul_():
     seoul_now = weather_forecast("서울")
     b_text.insert(END, seoul_now)
     b_text.insert(END, "\n")
+
+
+def weather_country_():
+    country_now = weather_forecast(input_country)
+    c_text.insert(END, country_now)
+    c_text.insert(END, "\n")
+
+# 디스코드 전송 함수
 
 
 def weather_seoul():
@@ -275,12 +255,6 @@ def weather_seoul():
     seoul_record.close()
 
 
-def weather_country_():
-    country_now = weather_forecast(input_country)
-    c_text.insert(END, country_now)
-    c_text.insert(END, "\n")
-
-
 def weather_country():
     country_now = send_to_discord(weather_forecast(input_country))
     country_record = open(
@@ -291,19 +265,43 @@ def weather_country():
     c_text.insert(END, "\n전송되었습니다.\n")
     country_record.close()
 
-
-def seoul_record_remove():
-    seoul_record = open("weather_record_seoul.txt", "w")
-    seoul_record.write("")
-    seoul_record.close()
-    e_text.insert(END, "삭제되었습니다.\n")
+# 디스코드 반복 전송 함수
 
 
-def country_record_remove():
-    country_record = open("weather_record_choose_city.txt", "w")
-    country_record.write("")
-    country_record.close()
-    e_text.insert(END, "삭제되었습니다.\n")
+def seoul_repeat_submit_button2_command():
+    seoul_repeat_input_text2 = seoul_repeat_input2.get()
+    seoul_repeat_button_back()
+    i = 0
+    for loop in range(int(seoul_repeat_input_text1)):
+        i = i + 1
+        text = "전송되었습니다.", i, f"/{seoul_repeat_input_text1}\n"
+        seoul_record = open("weather_record_seoul.txt", "a", encoding="UTF-8")
+        seoul_record.write(str(send_to_discord(weather_forecast("서울"))))
+        seoul_record.write("\n")
+        time.sleep(int(seoul_repeat_input_text2))
+        b_text.insert(END, weather_forecast("서울"))
+        b_text.insert(END, text)
+        seoul_record.close()
+
+
+def country_repeat_submit_button2_command():
+    country_repeat_input_text2 = country_repeat_input2.get()
+    country_repeat_button_back()
+    i = 0
+    for loop in range(int(country_repeat_input_text1)):
+        i = i + 1
+        text = "전송되었습니다.", i, f"/{country_repeat_input_text1}\n"
+        country_record = open(
+            "weather_record_choose_city.txt", "a", encoding="UTF-8")
+        country_record.write(
+            str(send_to_discord(weather_forecast(input_country))))
+        country_record.write("\n")
+        time.sleep(int(country_repeat_input_text2))
+        c_text.insert(END, weather_forecast(str(input_country)))
+        c_text.insert(END, text)
+        country_record.close()
+
+# 불러오기 함수
 
 
 def seoul_record_read():
@@ -330,6 +328,26 @@ def country_record_read():
         d_text.insert(END, "\n")
     country_record.close()
 
+# 순서대로 불러오기 함수
+
+# 삭제 함수
+
+
+def seoul_record_remove():
+    seoul_record = open("weather_record_seoul.txt", "w")
+    seoul_record.write("")
+    seoul_record.close()
+    e_text.insert(END, "삭제되었습니다.\n")
+
+
+def country_record_remove():
+    country_record = open("weather_record_choose_city.txt", "w")
+    country_record.write("")
+    country_record.close()
+    e_text.insert(END, "삭제되었습니다.\n")
+
+# 지우기 함수
+
 
 def seoul_delete():
     b_text.delete(1.0, END)
@@ -346,6 +364,8 @@ def record_delete():
 def remove_delete():
     e_text.delete(1.0, END)
 
+# 기본화면 위젯구성
+
 
 a1 = Button(app, text="서울날씨조회", command=seoul_button)
 a1.grid(row=1, column=1, padx=10, pady=10)
@@ -361,6 +381,8 @@ a4.grid(row=2, column=2, padx=10, pady=10)
 
 a5 = Button(app, text="나가기", command=app.destroy)
 a5.grid(row=3, column=1, padx=10, pady=10)
+
+# 서울날씨조회 위젯구성
 
 b1 = Button(app, text="날씨조회", command=weather_seoul_)
 b1.grid(row=4, column=1, padx=10, pady=10)
@@ -403,6 +425,8 @@ b5.grid_remove()
 b_text = scrolledtext.ScrolledText(app, wrap=WORD, width=30, height=10)
 b_text.grid(row=0, column=2, padx=10, pady=10)
 b_text.grid_remove()
+
+# 지역날씨조회 위젯구성
 
 country_input = Entry(app)
 country_input.grid(row=2, column=2, padx=10, pady=10)
@@ -454,6 +478,8 @@ c_text = scrolledtext.ScrolledText(app, wrap=WORD, width=30, height=10)
 c_text.grid(row=0, column=2, padx=10, pady=10)
 c_text.grid_remove()
 
+# 전송된날씨 불러오기 위젯구성
+
 d1 = Button(app, text="전송된 서울날씨 검색", command=seoul_record_read)
 d1.grid(row=4, column=2, padx=10, pady=10)
 d1.grid_remove()
@@ -481,6 +507,8 @@ d6.grid_remove()
 d_text = scrolledtext.ScrolledText(app, wrap=WORD, width=30, height=10)
 d_text.grid(row=0, column=2, padx=10, pady=10)
 d_text.grid_remove()
+
+# 날씨기록 삭제하기 위젯구성
 
 e1 = Button(app, text="서울 날씨 조회 기록", command=seoul_record_remove)
 e1.grid(row=3, column=1, padx=10, pady=10)
