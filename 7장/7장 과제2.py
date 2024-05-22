@@ -58,18 +58,22 @@ def seoul_repeat_button1():
     b_text.grid_remove()
     seoul_repeat_input1.grid()
     seoul_repeat_submit_button1.grid()
+    choose_repeat.grid()
 
 
 def seoul_repeat_button2():
     seoul_repeat_input1.grid_remove()
     seoul_repeat_submit_button1.grid_remove()
+    choose_repeat.grid_remove()
     seoul_repeat_input2.grid()
     seoul_repeat_submit_button2.grid()
+    choose_delay.grid()
 
 
 def seoul_repeat_button_back():
     seoul_repeat_input2.grid_remove()
     seoul_repeat_submit_button2.grid_remove()
+    choose_delay.grid_remove()
     b1.grid()
     b2.grid()
     b3.grid()
@@ -86,11 +90,13 @@ def country_button1():
     a5.grid_remove()
     country_input.grid()
     submit_button.grid()
+    choose_country.grid()
 
 
 def country_button2():
     country_input.grid_remove()
     submit_button.grid_remove()
+    choose_country.grid_remove()
     c1.grid()
     c2.grid()
     c3.grid()
@@ -122,18 +128,22 @@ def country_repeat_button1():
     c_text.grid_remove()
     country_repeat_input1.grid()
     country_repeat_submit_button1.grid()
+    choose_repeat.grid()
 
 
 def country_repeat_button2():
     country_repeat_input1.grid_remove()
     country_repeat_submit_button1.grid_remove()
+    choose_repeat.grid_remove()
     country_repeat_input2.grid()
     country_repeat_submit_button2.grid()
+    choose_delay.grid()
 
 
 def country_repeat_button_back():
     country_repeat_input2.grid_remove()
     country_repeat_submit_button2.grid_remove()
+    choose_delay.grid_remove()
     c1.grid()
     c2.grid()
     c3.grid()
@@ -330,6 +340,45 @@ def country_record_read():
 
 # 순서대로 불러오기 함수
 
+
+def seoul_record_line():
+    weathergroup = []
+    temperatures = {}
+    seoul_record = open("weather_record_seoul.txt", "r", encoding="UTF-8")
+    for line in seoul_record:
+        (a, b, c, d, e) = line.split("'")
+        weathergroup.append(line[2:21] + " " + b[:2] + " " + b[8:-1])
+    for line in weathergroup:
+        (day, Time, trash, temperature) = line.split()
+        temperatures[temperature] = day + " " + Time
+    seoul_record.close()
+    for each_temperatures in sorted(temperatures.keys(), reverse=True):
+        each_temperatures_ = each_temperatures + "°C\n"
+        temperatures_ = temperatures[each_temperatures] + " 서울\n"
+        d_text.insert(END, each_temperatures_)
+        d_text.insert(END, temperatures_)
+        d_text.insert(END, "--------------------------\n")
+
+
+def country_record_line():
+    weathergroup = []
+    temperatures = {}
+    country_record = open(
+        "weather_record_choose_city.txt", "r", encoding="UTF-8")
+    for line in country_record:
+        (a, b, c, d, e) = line.split("'")
+        weathergroup.append(line[2:21] + " " + b[:2] + " " + b[8:-1])
+    for line in weathergroup:
+        (day, Time, choose_town, temperature) = line.split()
+        temperatures[temperature] = day + " " + Time + " " + choose_town
+    country_record.close()
+    for each_temperatures in sorted(temperatures.keys(), reverse=True):
+        each_temperatures_ = each_temperatures + "°C\n"
+        temperatures_ = temperatures[each_temperatures] + "\n"
+        d_text.insert(END, each_temperatures_)
+        d_text.insert(END, temperatures_)
+        d_text.insert(END, "--------------------------\n")
+
 # 삭제 함수
 
 
@@ -437,21 +486,21 @@ submit_button.grid(row=3, column=2, pady=10)
 submit_button.grid_remove()
 
 country_repeat_input1 = Entry(app)
-country_repeat_input1.grid(row=2, column=2, padx=10, pady=10)
+country_repeat_input1.grid(row=10, column=2, padx=10, pady=10)
 country_repeat_input1.grid_remove()
 
 country_repeat_submit_button1 = Button(
     app, text="Submit", command=country_repeat_submit_button1_command)
-country_repeat_submit_button1.grid(row=3, column=2, pady=10)
+country_repeat_submit_button1.grid(row=11, column=2, pady=10)
 country_repeat_submit_button1.grid_remove()
 
 country_repeat_input2 = Entry(app)
-country_repeat_input2.grid(row=2, column=2, padx=10, pady=10)
+country_repeat_input2.grid(row=10, column=2, padx=10, pady=10)
 country_repeat_input2.grid_remove()
 
 country_repeat_submit_button2 = Button(
     app, text="Submit", command=country_repeat_submit_button2_command)
-country_repeat_submit_button2.grid(row=3, column=2, pady=10)
+country_repeat_submit_button2.grid(row=11, column=2, pady=10)
 country_repeat_submit_button2.grid_remove()
 
 c1 = Button(app, text="날씨조회", command=weather_country_)
@@ -488,11 +537,11 @@ d2 = Button(app, text="전송된 지역날씨 검색", command=country_record_re
 d2.grid(row=4, column=3, padx=10, pady=10)
 d2.grid_remove()
 
-d3 = Button(app, text="전송된 서울 날씨 중 가장 높은 기온")
+d3 = Button(app, text="전송된 서울 날씨 중 가장 높은 기온", command=seoul_record_line)
 d3.grid(row=5, column=2, padx=10, pady=10)
 d3.grid_remove()
 
-d4 = Button(app, text="전송된 지역 날씨 중 가장 높은 기온")
+d4 = Button(app, text="전송된 지역 날씨 중 가장 높은 기온", command=country_record_line)
 d4.grid(row=5, column=3, padx=10, pady=10)
 d4.grid_remove()
 
@@ -529,5 +578,21 @@ e3.grid_remove()
 e4 = Button(app, text="지우기", command=remove_delete)
 e4.grid(row=4, column=2, padx=10, pady=10)
 e4.grid_remove()
+
+# 인풋 설명 라벨
+
+
+choose_country = Label(app, text="조회하실 지역의 이름을 입력해주세요.", font=("Arial", 10))
+choose_country.grid(row=0, column=2, padx=20, pady=20)
+choose_country.grid_remove()
+
+choose_repeat = Label(app, text="반복하실 횟수를 입력해주세요.", font=("Arial", 10))
+choose_country.grid(row=0, column=2, padx=20, pady=20)
+choose_country.grid_remove()
+
+choose_delay = Label(app, text="전송 지연 시간(초)를 입력해주세요.", font=("Arial", 10))
+choose_country.grid(row=0, column=2, padx=20, pady=20)
+choose_country.grid_remove()
+
 
 app.mainloop()

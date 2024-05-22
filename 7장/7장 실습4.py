@@ -2,6 +2,8 @@ from tkinter import *
 import pygame.mixer
 import os
 
+# 20244021, 컴퓨터공학과, 김성준
+print("20244021, 컴퓨터공학과, 김성준")
 
 PATH = os.getcwd() + '\\sound'
 os.chdir(PATH)
