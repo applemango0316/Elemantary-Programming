@@ -12,11 +12,10 @@ from weather_forecast import *
 from discord_send_message import *
 from send_to_discord import *
 from tkinter import scrolledtext
-from tkinter import ttk
 from PIL import Image, ImageTk
 
 app = Tk()
-app.title("지금날씨4.0")
+app.title("지금날씨4.1")
 app.geometry('500x300+200+100')
 country = []
 
