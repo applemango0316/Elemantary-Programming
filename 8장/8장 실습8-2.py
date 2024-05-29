@@ -1,7 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 
-
+# 20244021, 컴퓨터공학과, 김성준
+print("20244021, 컴퓨터공학과, 김성준")
 window = tk.Tk()
 window.geometry('350x250')
 

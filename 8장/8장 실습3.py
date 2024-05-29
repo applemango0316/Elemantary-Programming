@@ -1,5 +1,8 @@
 from tkinter import *
 
+# 20244021, 컴퓨터공학과, 김성준
+print("20244021, 컴퓨터공학과, 김성준")
+
 
 def save_data():
     fileD = open("deliveries.txt", "a")

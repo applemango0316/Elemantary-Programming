@@ -1,3 +1,7 @@
+# 20244021, 컴퓨터공학과, 김성준
+print("20244021, 컴퓨터공학과, 김성준")
+
+
 def student(name, dep, year):
     print('이름: ', name)
     print('학과: ', dep)

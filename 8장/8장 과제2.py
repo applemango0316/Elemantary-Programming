@@ -14,10 +14,16 @@ from send_to_discord import *
 from tkinter import scrolledtext
 from PIL import Image, ImageTk
 
+# 20244021, 컴퓨터공학과, 김성준
+print("20244021, 컴퓨터공학과, 김성준")
+
+# TKINTER 기본 설정
 app = Tk()
 app.title("지금날씨4.1")
 app.geometry('500x300+200+100')
 country = []
+
+# 아이콘 변경
 
 Icon = Image.open('찌삐찌삐사진.jpg')
 photo = ImageTk.PhotoImage(Icon)
@@ -587,15 +593,18 @@ e4.grid_remove()
 # 인풋 설명 라벨
 
 
-choose_country = Label(app, text="조회하실 지역의 이름을 입력해주세요.", font=("Arial", 10))
+choose_country = Label(app, text="조회하실 지역의 이름을 입력해주세요.", font=(
+    "Arial", 10), relief="solid", borderwidth=1)
 choose_country.grid(row=0, column=2, padx=20, pady=20)
 choose_country.grid_remove()
 
-choose_repeat = Label(app, text="반복하실 횟수를 입력해주세요.", font=("Arial", 10))
+choose_repeat = Label(app, text="반복하실 횟수를 입력해주세요.",
+                      font=("Arial", 10), relief="raised", borderwidth=1)
 choose_country.grid(row=0, column=2, padx=20, pady=20)
 choose_country.grid_remove()
 
-choose_delay = Label(app, text="전송 지연 시간(초)를 입력해주세요.", font=("Arial", 10))
+choose_delay = Label(app, text="전송 지연 시간(초)를 입력해주세요.",
+                     font=("Arial", 10), relief="raised", borderwidth=1)
 choose_country.grid(row=0, column=2, padx=20, pady=20)
 choose_country.grid_remove()
 

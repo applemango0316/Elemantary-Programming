@@ -1,5 +1,8 @@
 from tkinter import *
 
+# 20244021, 컴퓨터공학과, 김성준
+print("20244021, 컴퓨터공학과, 김성준")
+
 
 def save_data():
     fileD = open("deliveries.txt", "a")
@@ -16,6 +19,10 @@ def save_data():
 
 app = Tk()
 app.title("Head-Ex Deliveries")
+
+Label(app, text="Depot:").pack()
+depot = Entry(app)
+depot.pack()
 
 Label(app, text="Description:").pack()
 description = Entry(app)
