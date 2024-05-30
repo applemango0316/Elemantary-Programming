@@ -4,7 +4,7 @@ import tkinter.messagebox
 
 def save_data():
     try:
-        fileD = open("deliveries.txt", "a")
+        fileD = open("deliveries.txt", "r")
         fileD.write("Depot:\n")
         fileD.write("%s\n" % depot.get())
         fileD.write("Description:\n")

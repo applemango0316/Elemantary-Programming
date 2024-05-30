@@ -13,6 +13,7 @@ from discord_send_message import *
 from send_to_discord import *
 from tkinter import scrolledtext
 from PIL import Image, ImageTk
+from tkinter import messagebox as mb
 
 # 20244021, 컴퓨터공학과, 김성준
 print("20244021, 컴퓨터공학과, 김성준")
@@ -228,12 +229,19 @@ def remove_button_back():
 
 def show_input():
     user_input = country_input.get()
-    country.append(user_input)
-    c1_name = str(user_input) + " 날씨조회"
-    c1.config(text=c1_name)
-    global input_country
-    input_country = user_input
-    return input_country
+    if user_input:
+        try:
+            country.append(user_input)
+            c1_name = str(user_input) + " 날씨조회"
+            c1.config(text=c1_name)
+            global input_country
+            input_country = user_input
+            return input_country
+        except Exception as ex:
+            mb.showerror(
+                "Error!", "Input value is not exist or wrong.\n %s" % ex)
+    else:
+        mb.showerror("Error!", "Input value is not exist or wrong.")
 
 
 def country_repeat_submit_button1_command():
@@ -292,103 +300,126 @@ def weather_country():
 def seoul_repeat_submit_button2_command():
     seoul_repeat_input_text2 = seoul_repeat_input2.get()
     seoul_repeat_button_back()
-    i = 0
-    for loop in range(int(seoul_repeat_input_text1)):
-        i = i + 1
-        text = "전송되었습니다.", i, f"/{seoul_repeat_input_text1}\n"
-        seoul_record = open("weather_record_seoul.txt", "a", encoding="UTF-8")
-        seoul_record.write(str(send_to_discord(weather_forecast("서울"))))
-        seoul_record.write("\n")
-        time.sleep(int(seoul_repeat_input_text2))
-        b_text.insert(END, weather_forecast("서울"))
-        b_text.insert(END, text)
-        seoul_record.close()
+    try:
+        i = 0
+        for loop in range(int(seoul_repeat_input_text1)):
+            i = i + 1
+            text = "전송되었습니다.", i, f"/{seoul_repeat_input_text1}\n"
+            seoul_record = open("weather_record_seoul.txt",
+                                "a", encoding="UTF-8")
+            seoul_record.write(str(send_to_discord(weather_forecast("서울"))))
+            seoul_record.write("\n")
+            time.sleep(int(seoul_repeat_input_text2))
+            b_text.insert(END, weather_forecast("서울"))
+            b_text.insert(END, text)
+            seoul_record.close()
+    except Exception as ex:
+        mb.showerror("Error!", "Input value is not exist or wrong.\n %s" % ex)
 
 
 def country_repeat_submit_button2_command():
     country_repeat_input_text2 = country_repeat_input2.get()
     country_repeat_button_back()
-    i = 0
-    for loop in range(int(country_repeat_input_text1)):
-        i = i + 1
-        text = "전송되었습니다.", i, f"/{country_repeat_input_text1}\n"
-        country_record = open(
-            "weather_record_choose_city.txt", "a", encoding="UTF-8")
-        country_record.write(
-            str(send_to_discord(weather_forecast(input_country))))
-        country_record.write("\n")
-        time.sleep(int(country_repeat_input_text2))
-        c_text.insert(END, weather_forecast(str(input_country)))
-        c_text.insert(END, text)
-        country_record.close()
+    try:
+        i = 0
+        for loop in range(int(country_repeat_input_text1)):
+            i = i + 1
+            text = "전송되었습니다.", i, f"/{country_repeat_input_text1}\n"
+            country_record = open(
+                "weather_record_choose_city.txt", "a", encoding="UTF-8")
+            country_record.write(
+                str(send_to_discord(weather_forecast(input_country))))
+            country_record.write("\n")
+            time.sleep(int(country_repeat_input_text2))
+            c_text.insert(END, weather_forecast(str(input_country)))
+            c_text.insert(END, text)
+            country_record.close()
+    except Exception as ex:
+        mb.showerror("Error!", "Input value is not exist or wrong.\n %s" % ex)
 
 # 불러오기 함수
 
 
 def seoul_record_read():
-    seoul_record = open("weather_record_seoul.txt", "r", encoding="UTF-8")
-    i = 0
-    for line in seoul_record:
-        i = i + 1
-        d_text.insert(END, i)
-        d_text.insert(END, ". ")
-        d_text.insert(END, line)
-        d_text.insert(END, "\n")
-    seoul_record.close()
+    try:
+        seoul_record = open("weather_record_seoul.txt", "r", encoding="UTF-8")
+        i = 0
+        for line in seoul_record:
+            i = i + 1
+            d_text.insert(END, i)
+            d_text.insert(END, ". ")
+            d_text.insert(END, line)
+            d_text.insert(END, "\n")
+        seoul_record.close()
+    except Exception as ex:
+        mb.showerror(
+            "Error!", "Record file is not exist or something is wrong.\n %s" % ex)
 
 
 def country_record_read():
-    country_record = open(
-        "weather_record_choose_city.txt", "r", encoding="UTF-8")
-    i = 0
-    for line in country_record:
-        i = i + 1
-        d_text.insert(END, i)
-        d_text.insert(END, ". ")
-        d_text.insert(END, line)
-        d_text.insert(END, "\n")
-    country_record.close()
+    try:
+        country_record = open(
+            "weather_record_choose_city.txt", "r", encoding="UTF-8")
+        i = 0
+        for line in country_record:
+            i = i + 1
+            d_text.insert(END, i)
+            d_text.insert(END, ". ")
+            d_text.insert(END, line)
+            d_text.insert(END, "\n")
+        country_record.close()
+    except Exception as ex:
+        mb.showerror(
+            "Error!", "Record file is not exist or something is wrong.\n %s" % ex)
 
 # 순서대로 불러오기 함수
 
 
 def seoul_record_line():
-    weathergroup = []
-    temperatures = {}
-    seoul_record = open("weather_record_seoul.txt", "r", encoding="UTF-8")
-    for line in seoul_record:
-        (a, b, c, d, e) = line.split("'")
-        weathergroup.append(line[2:21] + " " + b[:2] + " " + b[8:-1])
-    for line in weathergroup:
-        (day, Time, trash, temperature) = line.split()
-        temperatures[temperature] = day + " " + Time
-    seoul_record.close()
-    for each_temperatures in sorted(temperatures.keys(), reverse=True):
-        each_temperatures_ = each_temperatures + "°C\n"
-        temperatures_ = temperatures[each_temperatures] + " 서울\n"
-        d_text.insert(END, each_temperatures_)
-        d_text.insert(END, temperatures_)
-        d_text.insert(END, "--------------------------\n")
+    try:
+        weathergroup = []
+        temperatures = {}
+        seoul_record = open("weather_record_seoul.txt", "r", encoding="UTF-8")
+        for line in seoul_record:
+            (a, b, c, d, e) = line.split("'")
+            weathergroup.append(line[2:21] + " " + b[:2] + " " + b[8:-1])
+        for line in weathergroup:
+            (day, Time, trash, temperature) = line.split()
+            temperatures[temperature] = day + " " + Time
+        seoul_record.close()
+        for each_temperatures in sorted(temperatures.keys(), reverse=True):
+            each_temperatures_ = each_temperatures + "°C\n"
+            temperatures_ = temperatures[each_temperatures] + " 서울\n"
+            d_text.insert(END, each_temperatures_)
+            d_text.insert(END, temperatures_)
+            d_text.insert(END, "--------------------------\n")
+    except Exception as ex:
+        mb.showerror(
+            "Error!", "Record file is not exist or something is wrong.\n %s" % ex)
 
 
 def country_record_line():
-    weathergroup = []
-    temperatures = {}
-    country_record = open(
-        "weather_record_choose_city.txt", "r", encoding="UTF-8")
-    for line in country_record:
-        (a, b, c, d, e) = line.split("'")
-        weathergroup.append(line[2:21] + " " + b[:2] + " " + b[8:-1])
-    for line in weathergroup:
-        (day, Time, choose_town, temperature) = line.split()
-        temperatures[temperature] = day + " " + Time + " " + choose_town
-    country_record.close()
-    for each_temperatures in sorted(temperatures.keys(), reverse=True):
-        each_temperatures_ = each_temperatures + "°C\n"
-        temperatures_ = temperatures[each_temperatures] + "\n"
-        d_text.insert(END, each_temperatures_)
-        d_text.insert(END, temperatures_)
-        d_text.insert(END, "--------------------------\n")
+    try:
+        weathergroup = []
+        temperatures = {}
+        country_record = open(
+            "weather_record_choose_city.txt", "r", encoding="UTF-8")
+        for line in country_record:
+            (a, b, c, d, e) = line.split("'")
+            weathergroup.append(line[2:21] + " " + b[:2] + " " + b[8:-1])
+        for line in weathergroup:
+            (day, Time, choose_town, temperature) = line.split()
+            temperatures[temperature] = day + " " + Time + " " + choose_town
+        country_record.close()
+        for each_temperatures in sorted(temperatures.keys(), reverse=True):
+            each_temperatures_ = each_temperatures + "°C\n"
+            temperatures_ = temperatures[each_temperatures] + "\n"
+            d_text.insert(END, each_temperatures_)
+            d_text.insert(END, temperatures_)
+            d_text.insert(END, "--------------------------\n")
+    except Exception as ex:
+        mb.showerror(
+            "Error!", "Record file is not exist or something is wrong.\n %s" % ex)
 
 # 삭제 함수
 
