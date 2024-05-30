@@ -20,7 +20,7 @@ print("20244021, 컴퓨터공학과, 김성준")
 
 # TKINTER 기본 설정
 app = Tk()
-app.title("지금날씨4.1")
+app.title("지금날씨 v4.2")
 app.geometry('500x300+200+100')
 country = []
 
@@ -638,6 +638,5 @@ choose_delay = Label(app, text="전송 지연 시간(초)를 입력해주세요.
                      font=("Arial", 10), relief="raised", borderwidth=1)
 choose_country.grid(row=0, column=2, padx=20, pady=20)
 choose_country.grid_remove()
-
 
 app.mainloop()
