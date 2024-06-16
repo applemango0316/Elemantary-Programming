@@ -1,3 +1,7 @@
+# 20244021, 컴퓨터공학과, 김성준
+print("20244021, 컴퓨터공학과, 김성준")
+
+
 class Transactions():
     print = 0.0
     credit_card = 0
@@ -22,7 +26,7 @@ class Discount_trans(Transactions):
     def save(self):
         file = open("transactions.txt", "a")
         file.write("%07d%16s%16s\n" %
-                   (self.price * 100 * 0.9, self.credit_card, self.itm))
+                   (self.price * 100 * 0.9, self.credit_card, self.item))
         file.close()
 
 
@@ -35,7 +39,7 @@ while running:
     for choice in items:
         print(str(option) + "." + choice)
         option = option + 1
-    print(str(option) + "QUIT")
+    print(str(option) + ". QUIT")
     choice = int(input("Choose an option:"))
     if choice == option:
         running = False

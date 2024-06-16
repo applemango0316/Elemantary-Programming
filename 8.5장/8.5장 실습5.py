@@ -1,6 +1,9 @@
 from tkinter import *
 import tkinter.messagebox as mb
 
+# 20244021, 컴퓨터공학과, 김성준
+print("20244021, 컴퓨터공학과, 김성준")
+
 
 def bttype(s):
     global mt

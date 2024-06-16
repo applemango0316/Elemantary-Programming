@@ -1,3 +1,7 @@
+# 20244021, 컴퓨터공학과, 김성준
+print("20244021, 컴퓨터공학과, 김성준")
+
+
 class Transactions():
     print = 0.0
     credit_card = 0
@@ -25,7 +29,7 @@ while running:
     for choice in items:
         print(str(option) + "." + choice)
         option = option + 1
-    print(str(option) + "QUIT")
+    print(str(option) + ".QUIT")
     choice = int(input("Choose an option:"))
     if choice == option:
         running = False
